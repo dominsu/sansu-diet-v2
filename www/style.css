@@ -1,0 +1,95 @@
+:root{font-family:system-ui,'Noto Sans KR',sans-serif;color:#1e332d;background:#f4f7f5}*{box-sizing:border-box}body{margin:0}main{max-width:580px;margin:auto;padding:20px 16px 95px}h1{font-size:25px;margin:0}h2{font-size:18px;margin:0 0 15px}.muted{color:#71827b;font-size:13px}.card{background:white;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 2px 13px #1c4c3510}.line{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0}.count{display:flex;align-items:center;gap:13px}button{border:0;border-radius:12px;background:#e5f1ea;color:#245d4b;font-size:18px;min-width:38px;min-height:38px;cursor:pointer}button.primary{background:#246b5b;color:white;padding:12px 16px;font-size:15px;width:100%}input,select,textarea{font:inherit;padding:10px;border:1px solid #d4ded8;border-radius:10px;max-width:100%;background:white}input[type=number]{width:100px}input[type=date]{width:100%}.bar{height:8px;background:#e9efeb;border-radius:10px;overflow:hidden;margin-top:7px}.fill{height:100%;background:#4b9d7c}nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:center;box-shadow:0 -2px 10px #0001}nav button{font-size:13px;flex:1;max-width:150px;background:white;padding:14px 0;border-radius:0}nav button.active{color:#176b4f;font-weight:800;border-top:3px solid #176b4f}.hidden{display:none}.record{border-bottom:1px solid #edf0ed;padding:10px 0}.small{font-size:12px}.warning{color:#8d5933}svg{width:100%;height:190px}label{font-size:14px}.brand{display:flex;align-items:center;gap:13px;margin-bottom:8px}.brand-logo{width:70px;height:70px;object-fit:cover;border-radius:20px;flex-shrink:0;box-shadow:0 2px 10px #1c4c3515}.brand h1{font-size:25px;margin:0}.brand .muted{margin-top:4px}.date-tools{display:flex;align-items:center;gap:7px;margin-top:7px}.date-tools input{flex:1;min-width:0}.date-tools button{font-size:14px;min-width:38px;flex-shrink:0;padding:0 8px}.record-actions{display:flex;gap:7px;margin-top:8px}.record-actions button{font-size:13px;padding:7px 13px}.record-actions .danger{background:#fff0ee;color:#ad3434}
+/* 친구 관리 v5 */
+#friends input{width:100%;margin:5px 0 12px}#friends h3{font-size:16px;margin:22px 0 10px}.friend-buttons{display:flex;gap:8px}.friend-buttons button{flex:1;padding:8px;font-size:14px}.friend-code{display:flex;align-items:center;gap:10px;justify-content:space-between;background:#eef7f0;border-radius:12px;padding:12px;margin-bottom:10px}.friend-code code{font-size:13px;word-break:break-all}.notice{background:#fff7e6;color:#71521d;padding:12px;border-radius:12px;font-size:13px;margin:12px 0}.friend-item{padding:12px 0;border-bottom:1px solid #e4ece7}.friend-item button{font-size:13px;margin:4px;padding:7px 10px}.friend-item strong{display:block;overflow-wrap:anywhere}.friend-item p{margin:5px 0;font-size:13px}#friendRecords .record{font-size:13px}nav button{min-width:0;padding:14px 2px;font-size:12px}
+
+
+/* v6 추가 화면 - 기존 스타일 유지 */
+.welcome-screen{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 18px;background:#f4f7f5}
+.welcome-card{width:min(100%,430px);background:#fff;border-radius:24px;padding:32px 24px;text-align:center;box-shadow:0 5px 25px #1c4c3514}
+.welcome-mascot{width:170px;height:170px;max-width:70%;object-fit:contain;border-radius:26px}
+.welcome-card h1{font-size:30px;margin:16px 0 8px;color:#246b5b}
+.welcome-card p{line-height:1.8;color:#63776d;margin-bottom:25px}
+.welcome-action{display:block;width:100%;margin-top:10px;padding:13px;font-size:16px}
+.welcome-secondary{background:#e5f1ea;color:#245d4b}
+.guide-section,.food-section{padding:10px 0;border-bottom:1px solid #e8eee9}
+.guide-section h3,.food-section h3{font-size:16px;margin:6px 0 10px;color:#246b5b}
+.guide-section p,.food-section p{font-size:14px;line-height:1.75;margin:5px 0;white-space:pre-line}
+.food-example{background:#f4f8f5;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:14px;line-height:1.65}
+#foods .muted{line-height:1.6}
+nav{overflow-x:auto;justify-content:flex-start}
+nav button{flex:1 0 0;min-width:44px;font-size:11px;padding:12px 1px}
+
+/* v6 화면 전환 수정: 환영 화면과 하단 메뉴의 숨김 상태를 우선 적용 */
+.welcome-screen.hidden,
+#appNav.hidden,
+#appMain.hidden { display: none !important; }
+
+/* Android: 하단 시스템 내비게이션과 앱 메뉴 겹침 방지 */
+:root { --app-bottom-safe: max(32px, env(safe-area-inset-bottom, 0px)); }
+#appNav {
+  bottom: 0;
+  padding-bottom: var(--app-bottom-safe);
+  z-index: 1000;
+  box-sizing: border-box;
+  border-top: 1px solid #e8eee9;
+}
+#appNav button {
+  min-height: 54px;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+#appMain {
+  padding-bottom: calc(100px + var(--app-bottom-safe));
+}
+@media (max-width: 390px) {
+  #appNav button { font-size: 10px; letter-spacing: -0.3px; }
+}
+
+
+/* Skyblue Cat Edition — original layout and features preserved */
+:root{color:#0b3655;background:#f5fbff;--sky:#10a8e7;--navy:#073a65;--pale:#eaf8ff;--stroke:#d7ecf7;font-family:system-ui,'Noto Sans KR',sans-serif}
+body{background:radial-gradient(ellipse 90% 320px at 0% 0%,#d7f3ff 0%,transparent 85%),linear-gradient(180deg,#f6fcff,#fff 70%);color:var(--navy)}
+main{max-width:620px;padding:18px 16px calc(105px + var(--app-bottom-safe))}
+.brand{min-height:112px;padding:12px 12px 16px;background:linear-gradient(105deg,#d9f3ff,#f5fcff);border-radius:26px;gap:15px;margin:4px 0 14px}
+.brand-logo{width:90px;height:90px;object-fit:contain;border-radius:0;box-shadow:none;image-rendering:auto}
+.brand h1{font-size:29px;font-weight:850;color:#063b67;letter-spacing:-1px}.brand .muted{color:#67879b;font-size:14px}
+.card{border:1px solid #e1f0f7;border-radius:25px;box-shadow:0 8px 26px #157db40b;padding:22px 20px;margin:14px 0;background:#fff}
+h2{font-size:21px;color:#073d65;letter-spacing:-.6px;margin-bottom:21px}
+h3{color:#073d65}.muted{color:#738c9b;line-height:1.65}
+.line{border-bottom:1px solid #e9f2f7;min-height:64px;margin:0;gap:8px}.line:last-child{border-bottom:0}
+.line label,.line>strong{font-size:16px;font-weight:700;color:#103e5a}
+.count{gap:12px}.count button{width:43px;height:43px;min-width:43px;border:2px solid #bce7f6;background:#fff;color:#00a6de;border-radius:50%;font-size:27px;font-weight:750;line-height:1}
+.counter-number,.count strong{min-width:36px;text-align:center;font-size:20px;color:#0b3d60;font-variant-numeric:tabular-nums}
+button{background:#e9f7ff;color:#0788ba;border-radius:13px}
+button.primary{background:linear-gradient(105deg,#069ee4,#27c0ef);color:white;font-size:16px;font-weight:750;border-radius:18px;min-height:49px;box-shadow:0 5px 13px #13b2e528}
+input,select,textarea{border:1px solid #d4eaf4;border-radius:13px;color:#0c3b59}
+.date-tools button{background:#e8f7ff;color:#068fc0;border-radius:13px;min-height:42px}.date-tools input{min-height:44px}
+#total{color:#008cc2;font-weight:750}
+.bar{background:#e5f4fa}.fill{background:#14a8df}
+#appNav{background:#fff;box-shadow:0 -5px 22px #0d6c9e12;border-top:1px solid #e0edf5;padding-bottom:var(--app-bottom-safe)}
+#appNav button{background:white;color:#748c9c;min-height:54px;font-size:11px;font-weight:650;border:0;padding:12px 1px;white-space:nowrap}
+#appNav button.active{color:#009cd7;border-top:3px solid #009fe0;font-weight:850}
+.friend-code{background:#eaf8ff}.notice{background:#f0f9ff;color:#376c85}.food-example{background:#f0faff}.guide-section h3,.food-section h3{color:#078dbd}
+.welcome-screen{min-height:100dvh;background:radial-gradient(ellipse 85% 260px at 0 0,#d6f2ff 0%,transparent 100%),radial-gradient(ellipse 80% 260px at 100% 100%,#e2f5ff 0%,transparent 100%),#fff;padding:28px 20px;align-items:center}
+.welcome-card{background:transparent;box-shadow:none;border:0;width:min(100%,440px);padding:0 8px;border-radius:0}
+.welcome-mascot{display:block;width:min(100%,330px);height:auto;max-width:100%;aspect-ratio:2796/2208;object-fit:contain;border-radius:0;margin:0 auto 12px;image-rendering:auto}
+.welcome-card h1{font-size:clamp(34px,9vw,46px);color:#073e6b;font-weight:900;letter-spacing:-2px;margin:8px 0 2px}
+.welcome-card .welcome-slogan{font-size:clamp(17px,4.8vw,21px);font-weight:800;color:#04a3df;line-height:1.4;margin:5px 0 25px}
+.welcome-card .welcome-description{font-size:clamp(15px,4.2vw,18px);color:#194c6c;line-height:2;margin:0 0 32px}
+.welcome-action{min-height:56px;font-weight:800;font-size:18px;border-radius:40px;margin-top:12px}
+.welcome-secondary{border:2px solid #0ca7dc;background:white;color:#0597c9}
+@media(max-width:370px){.card{padding:18px 14px}.count{gap:6px}.count button{min-width:37px;width:37px;height:37px}.brand-logo{width:75px;height:75px}.brand h1{font-size:25px}.date-tools{gap:4px}}
+
+/* Approved clean cat art: separate raster illustration from live UI */
+.welcome-mascot{width:min(100%,370px);height:auto;aspect-ratio:850/570;object-fit:contain;display:block;margin:0 auto 8px}
+.brand-logo{width:102px;height:75px;object-fit:contain;object-position:center;background:transparent;border:0;box-shadow:none}
+.welcome-screen{background:#fff}
+@media(max-width:380px){.brand-logo{width:78px;height:65px}.welcome-mascot{width:min(100%,340px)}}
+
+/* Transparent scalable mascot icon in header */
+.brand-logo{width:94px;height:78px;object-fit:contain;object-position:center;background:transparent;border:0;box-shadow:none;flex-shrink:0}
+@media(max-width:380px){.brand-logo{width:76px;height:68px}}
+
+/* Updated mascot illustration: soft edges, no rectangular crop */
+.brand-logo{width:116px;height:96px;object-fit:contain;border-radius:0;box-shadow:none;background:transparent}
+@media(max-width:380px){.brand-logo{width:98px;height:85px}}

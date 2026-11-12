@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#eaf8ff" name="theme-color"/>
+<title>
+   산수식단
+  </title>
+<link href="cat-header.svg" rel="icon" type="image/svg+xml"/>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+<section class="welcome-screen" id="welcome"><div class="welcome-card">
+<img alt="체크리스트와 함께 쉬고 있는 하얀 고양이" class="welcome-mascot" src="cat-welcome-clean.png"/>
+<h1>산수식단</h1><p class="welcome-slogan">식단 관리, 산수만큼 쉽게!</p><p class="welcome-description">나에게 맞는 식단을 기록하고<br/>체중 변화를 한눈에 확인하세요!</p>
+<button class="primary welcome-action" id="startApp" type="button">시작하기</button>
+<button class="welcome-action welcome-secondary" id="openGuide" type="button">사용 안내서</button>
+</div></section><main class="hidden" id="appMain">
+<header class="brand">
+<img alt="산수식단 하얀 고양이" class="brand-logo" src="cat-header-new.png"/>
+<div>
+<h1>
+      산수식단
+     </h1>
+<div class="muted">
+      식단 관리, 산수만큼 쉽게!
+     </div>
+</div>
+</header>
+<section id="home">
+<div class="card record-card">
+<h2>
+      날짜별 식단 기록
+     </h2>
+<label for="day">
+      기록 날짜 (자유롭게 변경 가능)
+     </label>
+<div class="date-tools">
+<button aria-label="하루 전" id="prevDay" type="button">
+       ◀
+      </button>
+<input id="day" type="date"/>
+<button aria-label="하루 후" id="nextDay" type="button">
+       ▶
+      </button>
+<button id="todayDay" type="button">
+       오늘
+      </button>
+</div>
+<p class="muted" id="dateHint">
+      날짜를 선택한 뒤 입력하고 저장하세요.
+     </p>
+<div id="counters">
+</div>
+<div class="line"><label for="nuts">견과류 (25g 한 봉 기준)</label><div class="count"><button id="nutsMinus" type="button">−</button><strong id="nutsValue">0</strong><button id="nutsPlus" type="button">+</button></div></div><div class="line">
+<label>
+       영양제 섭취
+      </label>
+<select id="supp">
+<option value="">
+        선택 안 함
+       </option>
+<option>
+        O
+       </option>
+<option>
+        X
+       </option>
+</select>
+</div>
+<div class="line">
+<label>
+       가공 탄수화물
+      </label>
+<select id="processed">
+<option value="">
+        선택 안 함
+       </option>
+<option>
+        O
+       </option>
+<option>
+        X
+       </option>
+</select>
+</div>
+<div class="line">
+<label>
+       체중 (kg)
+      </label>
+<input id="weight" min="0" placeholder="선택 입력" step="0.01" type="number"/>
+</div>
+<label>
+      메모
+     </label>
+<textarea id="memo" placeholder="오늘의 식단 메모" rows="2" style="width:100%"></textarea>
+<p id="total">
+</p>
+<button class="primary" id="save">
+      이 날짜 기록 저장
+     </button>
+<p class="muted" id="saved">
+</p>
+</div>
+</section>
+<section class="hidden" id="history">
+<div class="card">
+<h2>
+      날짜별 기록
+     </h2>
+<div id="records">
+</div>
+</div>
+</section>
+<section class="hidden" id="stats">
+<div class="card">
+<h2>
+      주간 평균 체중
+     </h2>
+<p class="muted">
+      월요일~일요일 · 체중이 입력된 날만 계산
+     </p>
+<div id="weekly">
+</div>
+<svg aria-label="주간 평균 체중 그래프" id="chart" role="img" viewbox="0 0 340 190">
+</svg>
+</div>
+</section>
+<section class="hidden" id="settings">
+<div class="card">
+<h2>
+      기본 정보 및 추천량
+     </h2>
+<div class="line">
+<label>
+       성별
+      </label>
+<select id="sex">
+<option value="남성">
+        남성
+       </option>
+<option value="여성">
+        여성
+       </option>
+</select>
+</div>
+<div class="line">
+<label>
+       현재 체중 (kg)
+      </label>
+<input id="bodyweight" min="1" step="0.1" type="number"/>
+</div>
+<p id="recommend">
+</p>
+<button class="primary" id="saveSettings">
+      설정 저장
+     </button>
+<p class="muted">
+      추천량은 원본 시트의 체중별 추정 모델을 참고한 안내입니다. 의료·영양 처방이 아닙니다.
+     </p>
+</div>
+<div class="card">
+<h2>
+      데이터 백업
+     </h2>
+<button class="primary" id="export">
+      기록 JSON 파일로 내보내기
+     </button>
+<p class="muted">
+      현재 버전은 이 기기의 브라우저에만 저장됩니다. 브라우저 데이터 삭제 시 기록이 사라질 수 있으므로 백업하세요.
+     </p>
+</div>
+</section>
+<section class="hidden" id="friends"><div class="card"><h2>♧ 친구 관리</h2><p class="muted">서로 승인한 친구끼리만 기록을 볼 수 있어요. 친구의 기록은 수정할 수 없어요.</p><div class="notice" id="friendStatus">Firebase 연결 전입니다. 아래 안내를 확인하세요.</div><div id="authPanel"><label>이메일</label><input autocomplete="email" id="friendEmail" placeholder="이메일 주소" type="email"/><label>비밀번호 (6자 이상)</label><input autocomplete="current-password" id="friendPassword" placeholder="비밀번호" type="password"/><div class="friend-buttons"><button id="friendSignup">회원가입</button><button id="friendLogin">로그인</button></div></div><div class="hidden" id="friendSigned"><p>내 친구 코드</p><div class="friend-code"><code id="myFriendCode">—</code><button id="copyFriendCode">복사</button></div><p class="muted" id="myFriendEmail"></p><button id="friendLogout">로그아웃</button><hr/><label>친구 코드 입력</label><input id="friendCodeInput" placeholder="친구의 코드"/><button class="primary" id="friendRequest">친구 요청 보내기</button><h3>받은 친구 요청</h3><div class="muted" id="incomingRequests">받은 요청이 없습니다.</div><h3>내 친구</h3><div class="muted" id="friendList">아직 친구가 없습니다.</div><h3>친구 기록</h3><div class="muted" id="friendRecords">친구를 선택하면 기록이 표시됩니다.</div></div></div><div class="card"><h2>🔒 기록 공유 안내</h2><p class="muted">친구를 수락하면 식단 횟수와 체중 수치를 서로 열람할 수 있습니다. 개인 메모는 공유하지 않습니다. 친구 삭제 시 열람 권한이 해제됩니다.</p><p class="muted">실제 사용을 위해 Firebase 프로젝트 설정 및 보안 규칙 배포가 필요합니다. 현재 기기의 기존 기록은 로그인만으로 자동 업로드되지 않습니다.</p></div></section><section class="hidden" id="guide"><div class="card"><h2>📖 사용 안내서</h2><div id="guideContent"></div></div></section><section class="hidden" id="foods"><div class="card"><h2>▣ 식품 추천</h2><p class="muted">식품별 1단위 예시를 확인하세요. 정확한 영양소 함량은 제품과 조리법에 따라 달라집니다.</p><div id="foodContent"></div></div></section></main>
+<nav class="hidden" id="appNav">
+<button class="active" data-tab="home">
+    ✎ 기록
+   </button>
+<button data-tab="history">
+    ▤ 목록
+   </button>
+<button data-tab="stats">
+    ▥ 분석
+   </button>
+<button data-tab="settings">
+    ⚙ 설정
+   </button>
+<button data-tab="friends">♧ 친구</button><button data-tab="foods">▣ 식품</button><button data-tab="guide">☷ 안내</button></nav>
+<script src="recommendations.js">
+</script>
+<script src="app.js">
+</script>
+<script src="friends.js" type="module"></script><script src="guide-data.js"></script><script src="foods-data.js"></script><script src="extras.js"></script></body>
+</html>
